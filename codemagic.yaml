@@ -34,7 +34,6 @@ workflows:
       vars:
         XCODE_WORKSPACE: "ios/App/App.xcworkspace"
         XCODE_SCHEME: "App"
-        APP_STORE_APPLE_ID: ""
     scripts:
       - name: Install dependencies
         script: npm ci
@@ -49,16 +48,7 @@ workflows:
       - name: Increment build number
         script: |
           cd $CM_BUILD_DIR/ios/App
-          if [ -n "$APP_STORE_APPLE_ID" ]; then
-            LATEST_BUILD_NUMBER=$(app-store-connect get-latest-app-store-build-number "$APP_STORE_APPLE_ID")
-            if [ -n "$LATEST_BUILD_NUMBER" ]; then
-              agvtool new-version -all $(($LATEST_BUILD_NUMBER + 1))
-            else
-              agvtool new-version -all $BUILD_NUMBER
-            fi
-          else
-            agvtool new-version -all $BUILD_NUMBER
-          fi
+          agvtool new-version -all $BUILD_NUMBER
       - name: Build IPA
         script: |
           cd $CM_BUILD_DIR/ios/App

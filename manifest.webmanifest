@@ -1,0 +1,22 @@
+{
+  "name": "English A2 Offline Coach",
+  "short_name": "A2 Coach",
+  "description": "Offline English practice for A2 students with device voice and local feedback.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f4ede1",
+  "theme_color": "#134074",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "outputs/assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "outputs/assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

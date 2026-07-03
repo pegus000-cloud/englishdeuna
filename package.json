@@ -1,0 +1,32 @@
+{
+  "name": "english-a2-offline-coach",
+  "version": "1.0.0",
+  "description": "EnglishDeUna mobile shell and offline-first PWA for A2 English learners.",
+  "scripts": {
+    "cap:sync": "npx cap sync",
+    "cap:add:android": "npx cap add android",
+    "cap:add:ios": "npx cap add ios",
+    "cap:open:android": "npx cap open android",
+    "cap:open:ios": "npx cap open ios",
+    "assets:generate": "npx capacitor-assets generate --android --ios --pwa"
+  },
+  "keywords": [
+    "english",
+    "offline",
+    "pwa",
+    "capacitor",
+    "android",
+    "ios"
+  ],
+  "author": "Pedro / Codex",
+  "license": "ISC",
+  "dependencies": {
+    "@capacitor/android": "^8.4.1",
+    "@capacitor/core": "^8.4.1",
+    "@capacitor/ios": "^8.4.1"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
+    "@capacitor/cli": "^8.4.1"
+  }
+}

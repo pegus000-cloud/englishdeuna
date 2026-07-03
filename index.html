@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#134074">
+  <meta name="description" content="Offline English A2 conversation coach with device voice and local feedback.">
+  <title>English A2 Offline Coach</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="outputs/assets/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Offline PWA</p>
+        <h1>English A2 Offline Coach</h1>
+        <p class="hero-copy">
+          Practice short conversations, listen with your device voice, speak back,
+          and get local feedback for pronunciation and grammar without tokens.
+        </p>
+      </div>
+      <div class="hero-actions">
+        <button id="install-button" class="secondary" hidden>Install App</button>
+        <button id="download-pack-button" class="ghost">Offline Tips</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="panel lesson-panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Lesson Flow</p>
+            <h2>Choose a situation</h2>
+          </div>
+          <span id="offline-badge" class="badge">Checking...</span>
+        </div>
+
+        <div id="lesson-list" class="lesson-list" aria-label="Lesson scenarios"></div>
+      </section>
+
+      <section class="panel practice-panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Practice</p>
+            <h2 id="scenario-title">Select a lesson</h2>
+          </div>
+          <span id="step-badge" class="badge muted">0 / 0</span>
+        </div>
+
+        <div class="conversation-card">
+          <p class="label">Situation</p>
+          <p id="scenario-context" class="context-copy">
+            Pick a lesson to start.
+          </p>
+
+          <div class="line-block">
+            <p class="label">Model line</p>
+            <p id="prompt-line" class="prompt-line">The phrase will appear here.</p>
+          </div>
+
+          <div class="controls">
+            <button id="listen-button">Listen</button>
+            <button id="record-button" class="secondary">Speak</button>
+            <button id="next-button" class="ghost">Next line</button>
+          </div>
+        </div>
+
+        <div class="feedback-grid">
+          <article class="panel subpanel">
+            <p class="label">Your transcript</p>
+            <p id="user-transcript" class="transcript">Waiting for your voice...</p>
+          </article>
+          <article class="panel subpanel">
+            <p class="label">Local feedback</p>
+            <div id="feedback-output" class="feedback-output">
+              Choose a lesson, then listen and speak.
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel tools-panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Study Tools</p>
+            <h2>Track your progress</h2>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <article class="stat-card">
+            <span class="stat-label">Completed rounds</span>
+            <strong id="stat-rounds">0</strong>
+          </article>
+          <article class="stat-card">
+            <span class="stat-label">Average score</span>
+            <strong id="stat-score">0%</strong>
+          </article>
+          <article class="stat-card">
+            <span class="stat-label">Streak</span>
+            <strong id="stat-streak">0</strong>
+          </article>
+        </div>
+
+        <article class="tips-card">
+          <p class="label">Offline setup for Android</p>
+          <ol>
+            <li>Install the PWA from Chrome.</li>
+            <li>Download the English offline speech pack in Android voice settings.</li>
+            <li>Use the app once online so the browser caches all lessons.</li>
+            <li>Then open it without internet and keep practicing.</li>
+          </ol>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <template id="lesson-card-template">
+    <button class="lesson-card" type="button">
+      <span class="lesson-level"></span>
+      <strong class="lesson-title"></strong>
+      <span class="lesson-summary"></span>
+    </button>
+  </template>
+
+  <script src="lessons.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

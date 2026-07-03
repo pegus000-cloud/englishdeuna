@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#12343b">
+  <title>EnglishDeUna</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icon-192.png">
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="welcomeOverlay" class="welcome-overlay hidden" aria-hidden="true">
+    <section class="welcome-card" aria-label="Seleccion inicial">
+      <p class="eyebrow">Bienvenida</p>
+      <h2>¿La estudiante es niño o niña?</h2>
+      <p class="helper-copy">Esto ayuda a preparar un avatar inicial. Luego se puede personalizar dentro de la app.</p>
+      <div class="welcome-actions">
+        <button id="chooseBoyButton" class="primary-button" type="button">Niño</button>
+        <button id="chooseGirlButton" class="secondary-button" type="button">Niña</button>
+      </div>
+    </section>
+  </div>
+
+  <main class="app-shell">
+    <section class="coach-panel" aria-label="EnglishDeUna">
+      <header class="topbar">
+        <div class="brand">
+          <div id="topAvatarPreview" class="top-avatar-preview theme-sky">
+            <div class="top-avatar-stage">
+              <div id="topAvatarAccessoryBack" class="avatar-accessory accessory-back"></div>
+              <div id="topAvatarBody" class="avatar-body tone-warm shirt-teal compact-avatar">
+                <div class="avatar-head">
+                  <div class="avatar-hair hair-short"></div>
+                  <div class="avatar-face">
+                    <span class="eye left"></span>
+                    <span class="eye right"></span>
+                    <span class="mouth"></span>
+                  </div>
+                  <div id="topAvatarAccessoryFront" class="avatar-accessory accessory-front"></div>
+                </div>
+                <div class="avatar-torso"></div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <p class="eyebrow">EnglishDeUna</p>
+            <h1>Habla ingles sin pena</h1>
+            <p class="subcopy">Coach offline para listening, speaking, reading y writing.</p>
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <button id="refreshAppButton" class="icon-button" type="button">Actualizar app</button>
+          <button id="installButton" class="icon-button" type="button">Instalar app</button>
+        </div>
+      </header>
+
+      <div class="status-strip">
+        <span id="networkStatus">Listo</span>
+        <span id="voiceStatus">Voz local</span>
+        <span id="scoreStatus">0 puntos</span>
+        <span id="moduleStatus">Listening</span>
+      </div>
+
+      <section class="progress-strip" aria-label="Progreso gamificado">
+        <article class="progress-card hero-progress">
+          <p class="field-label">Nivel actual</p>
+          <div class="level-row">
+            <strong id="levelValue">1</strong>
+            <span id="rankLabel" class="rank-pill">Starter</span>
+          </div>
+          <div class="xp-meter" aria-hidden="true"><span id="xpMeter"></span></div>
+          <p id="xpText" class="helper-copy">0 / 120 XP para el siguiente nivel</p>
+        </article>
+
+        <article class="progress-card">
+          <p class="field-label">Racha</p>
+          <strong id="streakValue">0</strong>
+          <p class="helper-copy">actividades seguidas con buen resultado</p>
+        </article>
+
+        <article class="progress-card">
+          <p class="field-label">Monedas</p>
+          <strong id="coinsValue">0</strong>
+          <p class="helper-copy">recompensa local por practicar</p>
+        </article>
+
+        <article class="progress-card">
+          <p class="field-label">Logro reciente</p>
+          <strong id="achievementValue">Sin insignias</strong>
+          <p id="achievementHint" class="helper-copy">Completa actividades para desbloquear recompensas.</p>
+        </article>
+      </section>
+
+      <nav class="module-tabs" aria-label="Competencias de ingles">
+        <button class="module-tab active" type="button" data-module="listening">Listening</button>
+        <button class="module-tab" type="button" data-module="speaking">Speaking</button>
+        <button class="module-tab" type="button" data-module="reading">Reading</button>
+        <button class="module-tab" type="button" data-module="writing">Writing</button>
+        <button class="module-tab" type="button" data-module="shop">Shop</button>
+      </nav>
+
+      <div class="workspace">
+        <aside class="side-column">
+          <section class="card">
+            <label class="field-label" for="activitySelect">Actividad</label>
+            <select id="activitySelect"></select>
+            <p id="activitySummary" class="helper-copy">Selecciona una actividad para practicar.</p>
+          </section>
+
+          <section class="card target-box">
+            <p class="box-label">Objetivo</p>
+            <p id="targetPhrase" class="target-phrase">Escoge un modulo para empezar.</p>
+            <button id="hearTargetButton" class="secondary-button" type="button">Escuchar</button>
+          </section>
+
+          <section class="card stats-grid">
+            <div>
+              <span id="turnCount">0</span>
+              <small>turnos</small>
+            </div>
+            <div>
+              <span id="bestScore">0</span>
+              <small>mejor</small>
+            </div>
+            <div>
+              <span id="completedCount">0</span>
+              <small>completadas</small>
+            </div>
+            <div>
+              <span id="modulePoints">0</span>
+              <small>modulo</small>
+            </div>
+          </section>
+
+          <section class="card badges-card">
+            <p class="field-label">Insignias por competencia</p>
+            <div id="badgeGrid" class="badge-grid"></div>
+          </section>
+
+          <section class="card avatar-card">
+            <div class="avatar-card-head">
+              <div>
+                <p class="field-label">Avatar</p>
+                <p class="helper-copy">Personaliza tu estudiante con accesorios y colores.</p>
+              </div>
+              <button id="randomizeAvatarButton" class="ghost-button" type="button">Aleatorio</button>
+            </div>
+
+            <div id="avatarPreview" class="avatar-preview theme-sky">
+              <div class="avatar-stage">
+                <div id="avatarAccessoryBack" class="avatar-accessory accessory-back"></div>
+                <div id="avatarBody" class="avatar-body tone-warm shirt-teal">
+                  <div class="avatar-head">
+                    <div class="avatar-hair hair-short"></div>
+                    <div class="avatar-face">
+                      <span class="eye left"></span>
+                      <span class="eye right"></span>
+                      <span class="mouth"></span>
+                    </div>
+                    <div id="avatarAccessoryFront" class="avatar-accessory accessory-front"></div>
+                  </div>
+                  <div class="avatar-torso"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="avatar-controls">
+              <label class="field-label" for="avatarBaseSelect">Base</label>
+              <select id="avatarBaseSelect"></select>
+              <label class="field-label" for="avatarThemeSelect">Fondo</label>
+              <select id="avatarThemeSelect"></select>
+            </div>
+          </section>
+
+        </aside>
+
+        <section class="main-column">
+          <section id="listeningPanel" class="module-panel active" aria-label="Listening practice">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Listening</p>
+                <h2 id="listeningTitle">Practice listening</h2>
+              </div>
+            </div>
+            <div class="exercise-card">
+              <p id="listeningPrompt" class="lead-copy">Listen to the audio and answer the question.</p>
+              <button id="listeningPlayButton" class="primary-button" type="button">Reproducir audio</button>
+              <p id="listeningQuestion" class="question-copy"></p>
+              <div id="listeningOptions" class="options-grid"></div>
+              <p id="listeningFeedback" class="feedback-copy">Escucha y responde.</p>
+              <button id="listeningNextButton" class="ghost-button hidden" type="button">Siguiente</button>
+            </div>
+          </section>
+
+          <section id="speakingPanel" class="module-panel" aria-label="Speaking practice">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Speaking</p>
+                <h2 id="speakingTitle">Practice speaking</h2>
+              </div>
+            </div>
+            <div class="speaking-live-bar" aria-label="Estado de speaking">
+              <article id="speakingGuideIndicator" class="speaking-indicator-card">
+                <div class="speaking-indicator-head">
+                  <div class="guide-mini-avatar">
+                    <span class="guide-mini-face"></span>
+                  </div>
+                  <div>
+                    <strong>Guia</strong>
+                    <p id="speakingGuideStatus">Listo para hablar contigo.</p>
+                  </div>
+                </div>
+                <div id="coachSpeechDots" class="speech-dots" aria-hidden="true">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+              </article>
+              <article id="micSignalIndicator" class="speaking-indicator-card">
+                <div class="speaking-indicator-head">
+                  <div class="mic-mini-orb">
+                    <span></span>
+                  </div>
+                  <div>
+                    <strong>Microfono</strong>
+                    <p id="micSignalStatus">En espera.</p>
+                  </div>
+                </div>
+                <div id="micSignalBars" class="mic-signal-bars" aria-hidden="true">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+              </article>
+            </div>
+            <div id="chatLog" class="chat-log" aria-live="polite"></div>
+            <div class="composer">
+              <textarea id="typedAnswer" rows="2" placeholder="Tambien puedes escribir tu respuesta..."></textarea>
+              <div class="action-row">
+                <button id="micButton" class="primary-button" type="button">Hablar</button>
+                <button id="sendButton" class="secondary-button" type="button">Enviar</button>
+                <button id="nextButton" class="ghost-button" type="button">Siguiente</button>
+              </div>
+            </div>
+          </section>
+
+          <section id="readingPanel" class="module-panel" aria-label="Reading practice">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Reading</p>
+                <h2 id="readingTitle">Read and answer</h2>
+              </div>
+            </div>
+            <article class="exercise-card">
+              <p id="readingPassage" class="passage-copy"></p>
+              <p id="readingQuestion" class="question-copy"></p>
+              <div id="readingOptions" class="options-grid"></div>
+              <p id="readingFeedback" class="feedback-copy">Lee con calma y elige la mejor opcion.</p>
+              <button id="readingNextButton" class="ghost-button hidden" type="button">Siguiente</button>
+            </article>
+          </section>
+
+          <section id="writingPanel" class="module-panel" aria-label="Writing practice">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Writing</p>
+                <h2 id="writingTitle">Write your answer</h2>
+              </div>
+            </div>
+            <article class="exercise-card">
+              <p id="writingPrompt" class="question-copy"></p>
+              <p id="writingGoal" class="helper-copy"></p>
+              <textarea id="writingAnswer" rows="5" placeholder="Write 2 to 4 sentences in English..."></textarea>
+              <div class="action-row compact">
+                <button id="writingCheckButton" class="primary-button" type="button">Revisar</button>
+                <button id="writingSampleButton" class="ghost-button" type="button">Ver ejemplo</button>
+              </div>
+              <div id="writingFeedback" class="writing-feedback">
+                Escribe tu respuesta para recibir feedback local.
+              </div>
+              <button id="writingNextButton" class="ghost-button hidden" type="button">Siguiente</button>
+            </article>
+          </section>
+
+          <section id="shopPanel" class="module-panel" aria-label="Shop">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Shop</p>
+                <h2>Tienda de accesorios</h2>
+                <p class="helper-copy">Compra items con monedas ganadas practicando.</p>
+              </div>
+              <span id="shopCoinsPill" class="shop-coins-pill">0 monedas</span>
+            </div>
+            <article class="exercise-card shop-panel-card">
+              <div id="shopGrid" class="shop-grid"></div>
+            </article>
+          </section>
+        </section>
+
+        <aside class="feedback-column">
+          <section class="feedback-card">
+            <h2>Pronunciacion</h2>
+            <div class="meter" aria-hidden="true"><span id="pronunciationMeter"></span></div>
+            <p id="pronunciationFeedback">Habla o escribe para recibir feedback.</p>
+          </section>
+          <section class="feedback-card">
+            <h2>Gramatica</h2>
+            <ul id="grammarFeedback" class="feedback-list">
+              <li>Sin respuestas todavia.</li>
+            </ul>
+          </section>
+          <section class="feedback-card">
+            <h2>Coach</h2>
+            <p id="coachTip">Practica una competencia a la vez y repite con constancia.</p>
+          </section>
+          <section class="feedback-card">
+            <h2>Meta actual</h2>
+            <p id="goalTip">Completa actividades para sumar XP y subir de nivel.</p>
+          </section>
+        </aside>
+      </div>
+    </section>
+  </main>
+  <aside id="assistantWidget" class="assistant-widget" aria-label="Asistente del avatar">
+    <button id="assistantHideButton" class="assistant-hide" type="button">Ocultar</button>
+    <div id="assistantAvatarPreview" class="assistant-avatar-preview theme-sky">
+      <div class="assistant-avatar-stage">
+        <div id="assistantAvatarAccessoryBack" class="avatar-accessory accessory-back"></div>
+        <div id="assistantAvatarBody" class="avatar-body tone-warm shirt-teal compact-avatar">
+          <div class="avatar-head">
+            <div class="avatar-hair hair-short"></div>
+            <div class="avatar-face">
+              <span class="eye left"></span>
+              <span class="eye right"></span>
+              <span class="mouth"></span>
+            </div>
+            <div id="assistantAvatarAccessoryFront" class="avatar-accessory accessory-front"></div>
+          </div>
+          <div class="avatar-torso"></div>
+        </div>
+      </div>
+    </div>
+    <div class="assistant-bubble">
+      <p class="assistant-kicker">Asistente de estudio</p>
+      <strong id="assistantTitle">Hola, soy tu compañero</strong>
+      <p id="assistantMessage">Practica para conseguir monedas y comprar accesorios.</p>
+      <div class="assistant-actions">
+        <button id="assistantShowShopButton" class="secondary-button" type="button">Ver tienda</button>
+        <button id="assistantGiveTipButton" class="ghost-button" type="button">Dame una idea</button>
+      </div>
+    </div>
+  </aside>
+  <button id="assistantShowButton" class="assistant-show-button hidden" type="button">Mostrar asistente</button>
+  <script src="app.js" defer></script>
+</body>
+</html>

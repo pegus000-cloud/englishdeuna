@@ -5,7 +5,6 @@ const config: CapacitorConfig = {
   appName: "EnglishDeUna",
   webDir: "outputs",
   backgroundColor: "#102a56",
-  bundledWebRuntime: false,
   server: {
     androidScheme: "https"
   },

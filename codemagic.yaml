@@ -32,30 +32,29 @@ workflows:
         distribution_type: app_store
         bundle_identifier: co.englishdeuna.mobile
       vars:
-        XCODE_WORKSPACE: "ios/App/App.xcworkspace"
+        XCODE_PROJECT: "ios/App/App.xcodeproj"
         XCODE_SCHEME: "App"
     scripts:
       - name: Install dependencies
         script: npm ci
       - name: Sync Capacitor
         script: npx cap sync ios
-      - name: Install CocoaPods
-        script: |
-          cd ios/App
-          pod install
       - name: Set up code signing settings
-        script: xcode-project use-profiles
+        script: |
+          xcode-project use-profiles \
+            --project "$CM_BUILD_DIR/$XCODE_PROJECT" \
+            --custom-export-options='{"testFlightInternalTestingOnly": true}'
       - name: Increment build number
         script: |
           cd $CM_BUILD_DIR/ios/App
           agvtool new-version -all $BUILD_NUMBER
       - name: Build IPA
         script: |
-          cd $CM_BUILD_DIR/ios/App
           xcode-project build-ipa \
-            --workspace "$XCODE_WORKSPACE" \
+            --project "$CM_BUILD_DIR/$XCODE_PROJECT" \
             --scheme "$XCODE_SCHEME"
     artifacts:
+      - build/ios/ipa/*.ipa
       - ios/App/build/ios/ipa/*.ipa
       - /tmp/xcodebuild_logs/*.log
       - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.app
@@ -63,5 +62,6 @@ workflows:
     publishing:
       app_store_connect:
         auth: integration
-        submit_to_testflight: true
+        beta_groups:
+          - Internal Testers
         expire_build_submitted_for_review: true

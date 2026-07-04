@@ -64,4 +64,3 @@ workflows:
         auth: integration
         beta_groups:
           - Internal Testers
-        expire_build_submitted_for_review: true

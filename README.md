@@ -44,6 +44,8 @@ No SusNotas files are required for this app.
 
 - Android native shell is already compiling locally from the `android/` folder.
 - iOS cannot be compiled on this Windows machine with Xcode, so the project includes `codemagic.yaml` for cloud builds with Codemagic.
+- An alternate build lane now exists in `expo-wrapper/`, following the same Expo WebView-shell approach that worked better for SusNotas.
+- The Expo wrapper reuses the hosted app at `https://gonali.co/english-a2-offline-coach/` and is ready for EAS Build on both Android and iOS.
 - Before pushing the project to any Git provider, keep `android/keystore.properties`, the `work/signing/` folder, and any Apple signing files out of the repository.
 - In Codemagic, the iOS workflow still needs:
   - a connected Git repository

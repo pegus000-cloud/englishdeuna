@@ -19,6 +19,7 @@
       "supportsTablet": true,
       "bundleIdentifier": "co.englishdeuna.mobile",
       "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false,
         "NSMicrophoneUsageDescription": "EnglishDeUna usa el microfono para speaking, pronunciacion y conversaciones guiadas.",
         "NSCameraUsageDescription": "EnglishDeUna podria usar la camara para futuras actividades visuales y personalizacion del avatar.",
         "NSLocationWhenInUseUsageDescription": "EnglishDeUna podria usar la ubicacion para futuras experiencias contextuales si el estudiante decide activarlas.",
@@ -38,13 +39,18 @@
       "adaptiveIcon": {
         "foregroundImage": "../outputs/assets/icon-512.png",
         "backgroundColor": "#102a56"
-      }
+      },
+      "versionCode": 2
     },
     "web": {
       "favicon": "../outputs/assets/icon-192.png"
     },
     "extra": {
-      "appUrl": "https://gonali.co/english-a2-offline-coach/"
-    }
+      "appUrl": "https://gonali.co/english-a2-offline-coach/",
+      "eas": {
+        "projectId": "63b649d9-38ae-4bba-b215-524f53bc689a"
+      }
+    },
+    "owner": "pegus"
   }
 }

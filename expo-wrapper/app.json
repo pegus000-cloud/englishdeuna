@@ -25,7 +25,8 @@
         "NSLocationWhenInUseUsageDescription": "EnglishDeUna podria usar la ubicacion para futuras experiencias contextuales si el estudiante decide activarlas.",
         "NSPhotoLibraryUsageDescription": "EnglishDeUna podria permitir elegir imagenes para futuras funciones visuales o de perfil.",
         "NSPhotoLibraryAddUsageDescription": "EnglishDeUna podria guardar imagenes o recursos del estudiante para futuras funciones visuales."
-      }
+      },
+      "buildNumber": "3"
     },
     "android": {
       "package": "co.englishdeuna.mobile",
@@ -40,7 +41,7 @@
         "foregroundImage": "../outputs/assets/icon-512.png",
         "backgroundColor": "#102a56"
       },
-      "versionCode": 3
+      "versionCode": 4
     },
     "web": {
       "favicon": "../outputs/assets/icon-192.png"

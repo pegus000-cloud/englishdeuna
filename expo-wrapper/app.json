@@ -42,7 +42,7 @@
         "foregroundImage": "./assets/adaptive-foreground.png",
         "backgroundColor": "#102a56"
       },
-      "versionCode": 5
+      "versionCode": 7
     },
     "web": {
       "favicon": "./assets/icon-192.png"

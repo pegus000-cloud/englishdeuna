@@ -4,11 +4,11 @@
     "slug": "englishdeuna",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "../outputs/assets/icon-512.png",
+    "icon": "./assets/icon-1024.png",
     "scheme": "englishdeuna",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "../outputs/assets/icon-512.png",
+      "image": "./assets/icon-1024.png",
       "resizeMode": "contain",
       "backgroundColor": "#102a56"
     },
@@ -26,10 +26,11 @@
         "NSPhotoLibraryUsageDescription": "EnglishDeUna podria permitir elegir imagenes para futuras funciones visuales o de perfil.",
         "NSPhotoLibraryAddUsageDescription": "EnglishDeUna podria guardar imagenes o recursos del estudiante para futuras funciones visuales."
       },
-      "buildNumber": "3"
+      "buildNumber": "5"
     },
     "android": {
       "package": "co.englishdeuna.mobile",
+      "icon": "./assets/icon-1024.png",
       "permissions": [
         "CAMERA",
         "RECORD_AUDIO",
@@ -38,13 +39,13 @@
         "POST_NOTIFICATIONS"
       ],
       "adaptiveIcon": {
-        "foregroundImage": "../outputs/assets/icon-512.png",
+        "foregroundImage": "./assets/adaptive-foreground.png",
         "backgroundColor": "#102a56"
       },
-      "versionCode": 4
+      "versionCode": 5
     },
     "web": {
-      "favicon": "../outputs/assets/icon-192.png"
+      "favicon": "./assets/icon-192.png"
     },
     "extra": {
       "appUrl": "https://gonali.co/english-a2-offline-coach/",
